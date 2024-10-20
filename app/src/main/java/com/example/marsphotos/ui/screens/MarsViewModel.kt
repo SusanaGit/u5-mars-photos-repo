@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.marsphotos.data.MarsPhotosRepository
 import com.example.marsphotos.data.NetworkMarsPhotosRepository
 import com.example.marsphotos.model.MarsPhoto
 import com.example.marsphotos.network.MarsApi
@@ -36,7 +37,8 @@ sealed interface MarsUiState {
     object Loading : MarsUiState
 }
 
-class MarsViewModel : ViewModel() {
+class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository): ViewModel()
+{
     /** The mutable State that stores the status of the most recent request */
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
